@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Review Analysis Dashboard for Amazon</h1>
+            <h4>Made by: Suraj Keshri</h4><br>
+            <p>Complete workflow from data collection to sentiment classification and analysis</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- Step 1: Data Collection -->
+            <div class="section">
+                <h2>📊 Step 1: Data Collection</h2>
+                <div class="sample-data">
+                    <h4>Sample Dataset Available</h4>
+                    <p>We've included sample customer reviews and social media posts for demonstration. You can also add your own data below.</p>
+                </div>
+                
+                <div class="input-group">
+                    <label for="customData">Add Your Own Reviews/Posts (one per line):</label>
+                    <textarea id="customData" placeholder="Enter customer reviews or social media posts, one per line...
+Example:
+This product is amazing! Love it so much
+Terrible service, very disappointed
+The food was okay, nothing special
+Best purchase I've made this year!"></textarea>
+                </div>
+                
+                <button class="btn" onclick="loadSampleData()">Load Sample Dataset</button>
+                <button class="btn btn-secondary" onclick="addCustomData()">Add Custom Data</button>
+                <button class="btn btn-danger" onclick="clearData()">Clear All Data</button>
+                
+                <div id="dataStats" class="metrics hidden">
+                    <div class="metric">
+                        <div class="metric-value" id="totalTexts">0</div>
+                        <div class="metric-label">Total Texts</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="avgLength">0</div>
+                        <div class="metric-label">Avg Length</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Text Preprocessing -->
+            <div class="section">
+                <h2>🔧 Step 2: Text Preprocessing</h2>
+                <p>Apply cleaning, tokenization, and stemming to prepare text for analysis.</p>
+                
+                <div class="preprocessing-steps">
+                    <div class="step" id="step-cleaning">
+                        <h3>Text Cleaning</h3>
+                        <p>Remove special characters, URLs, and normalize text</p>
+                    </div>
+                    <div class="step" id="step-tokenization">
+                        <h3>Tokenization</h3>
+                        <p>Split text into individual words and tokens</p>
+                    </div>
+                    <div class="step" id="step-stemming">
+                        <h3>Stemming</h3>
+                        <p>Reduce words to their root forms</p>
+                    </div>
+                    <div class="step" id="step-stopwords">
+                        <h3>Stop Words Removal</h3>
+                        <p>Remove common words like 'the', 'and', 'is'</p>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="preprocessData()">Start Preprocessing</button>
+                
+                <div id="preprocessingResults" class="hidden">
+                    <h3>Preprocessing Results:</h3>
+                    <div id="preprocessedSample" class="processed-text"></div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Sentiment Classification -->
+            <div class="section">
+                <h2>🤖 Step 3: Sentiment Classification</h2>
+                <p>Using Naive Bayes classifier to determine sentiment (positive, negative, neutral).</p>
+                
+                <button class="btn" onclick="classifySentiments()">Run Classification</button>
+                <button class="btn btn-secondary" onclick="showClassifierDetails()">Show Classifier Details</button>
+                
+                <div id="classificationResults" class="results-grid hidden"></div>
+                
+                <div id="classifierDetails" class="hidden">
+                    <h3>Classifier Information:</h3>
+                    <div class="processed-text">
+                        <strong>Algorithm:</strong> Naive Bayes with feature extraction<br>
+                        <strong>Features:</strong> Word frequency, sentiment keywords, text length<br>
+                        <strong>Classes:</strong> Positive, Negative, Neutral<br>
+                        <strong>Training:</strong> Pre-trained on sentiment lexicon and patterns
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Performance Evaluation -->
+            <div class="section">
+                <h2>📈 Step 4: Performance Evaluation & Analysis</h2>
+                
+                <div class="metrics" id="performanceMetrics">
+                    <div class="metric">
+                        <div class="metric-value" id="accuracy">0%</div>
+                        <div class="metric-label">Accuracy</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="precision">0%</div>
+                        <div class="metric-label">Precision</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="recall">0%</div>
+                        <div class="metric-label">Recall</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="f1Score">0%</div>
+                        <div class="metric-label">F1-Score</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="sentimentChart"></canvas>
+                </div>
+                
+                <button class="btn" onclick="generateReport()">Generate Analysis Report</button>
+                
+                <div id="analysisReport" class="hidden">
+                    <h3>Sentiment Trends Analysis:</h3>
+                    <div id="reportContent" class="processed-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
